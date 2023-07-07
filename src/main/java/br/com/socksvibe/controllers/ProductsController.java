@@ -7,6 +7,7 @@ import br.com.socksvibe.services.ProductsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,7 +26,7 @@ public class ProductsController {
         this.productsService = productsService;
     }
 
-    @PostMapping
+    @PostMapping(value = "create", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductsDto productsDto) throws RuntimeException {
         ProductsModel productsModel = new ProductsModel();
         if(productsService.existsProductBySku(productsDto.getSku())) {
